@@ -1,8 +1,19 @@
 .kg-item {
-    background-color: khaki;
+    background-color: lightyellow;
 }
 
 .kg-items {
     font-weight: bold;
-    color: darkgreen;
+    color: black;
+}
+
+.button {
+    margin-left: 20px;
+    padding: 5px 10px;
+    background-color: green;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    float: right;
 }
