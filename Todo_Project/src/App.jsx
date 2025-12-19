@@ -21,8 +21,11 @@ import ProfileCard from './components/ProfileCard.jsx';
 import StyledCard from './components/StyledCard.jsx';
 import Switcher from './components/Switcher.jsx';
 import TodoList from './components/TodoList.jsx';
+import { UpdateUser } from './components/UpdateUser.jsx';
+import { UserProvider } from './components/UserContext.jsx';
 import UserInfo from './components/UserInfo.jsx';
 import UserList from './components/UserList.jsx';
+import UserProfile from './components/UserProfile.jsx';
 import UserStatus from './components/UserStatus.jsx';
 import Weather from './components/Weather.jsx';
 import WelcomeMessage from './components/WelcomeMessage.jsx';
@@ -136,8 +139,12 @@ const App = () => {
 
     <FetchDataEffect />
 
-      <CounterEffect />  
+      <CounterEffect />
 
+      <UserProvider>
+      <UserProfile />
+      <UpdateUser />  
+      </UserProvider>  
       <WelcomeMessage />
       <Greet />
       <Greeting timeofDay="morning" />
