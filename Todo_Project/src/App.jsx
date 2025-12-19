@@ -1,6 +1,11 @@
 import { Add } from './components/Add.jsx';
+import BasicEffect from './components/BasicEffect.jsx';
+import ComponentA from './components/ComponentA.jsx';
+import ComponentB from './components/ComponentB.jsx';
 import CopyInput from './components/CopyInput.jsx';
 import Counter from './components/Counter.jsx';
+import CounterEffect from './components/CounterEffect.jsx';
+import FetchDataEffect from './components/FetchDataEffect.jsx';
 import Footer from './components/Footer.jsx';
 import Greet from './components/Greet.jsx';
 import Greeting from './components/Greeting.jsx';
@@ -14,13 +19,14 @@ import Products from './components/Products.jsx';
 import Profile from './components/Profile.jsx';
 import ProfileCard from './components/ProfileCard.jsx';
 import StyledCard from './components/StyledCard.jsx';
+import Switcher from './components/Switcher.jsx';
 import TodoList from './components/TodoList.jsx';
 import UserInfo from './components/UserInfo.jsx';
 import UserList from './components/UserList.jsx';
 import UserStatus from './components/UserStatus.jsx';
 import Weather from './components/Weather.jsx';
 import WelcomeMessage from './components/WelcomeMessage.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 // function App() {
@@ -71,8 +77,35 @@ const App = () => {
     setFriends(Friends.filter((f) => f !== 'NewFriend'));
   }
 
+
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    console.log("Call UseEffect!");
+    document.title = `You clicked ${value} times`;
+  }, [value]);
+
+
+
+
+  const [data, Setdata] = useState([]);
+
+  useEffect(() => {
+    async function fetchData () {
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+
+      const data = await response.json();
+
+      if (data && data.length) Setdata(data);
+    }
+    fetchData();
+  }, []);
+
+
   return (
     <div>
+      <h1>{value}</h1>
+      <button onClick={() => setValue(value + 1)}>Click Me</button>
 
 
     <p>Count: {count}</p>
@@ -87,6 +120,23 @@ const App = () => {
     <button onClick={addonefriend}>Add a Friend</button>
     <button onClick={removefriend}>Remove a Friend</button>
 
+
+
+    <div>
+      <h2>Fetched Data:</h2>
+      <ul>
+        {data.map(item => (
+          <li key={item.id}>{item.title}</li>
+        ))}
+      </ul>
+    </div>
+
+    <ComponentA />
+    {/* <ComponentB /> */}
+
+    <FetchDataEffect />
+
+      <CounterEffect />  
 
       <WelcomeMessage />
       <Greet />
@@ -106,6 +156,10 @@ const App = () => {
       <Profile />
       
       <CopyInput />
+
+      <Switcher />
+
+      <BasicEffect />
 
 
       <User name="Rudraksh" age={19} isMarried={false} />
