@@ -1,22 +1,26 @@
 import { Add } from './components/Add.jsx';
+import CopyInput from './components/CopyInput.jsx';
+import Counter from './components/Counter.jsx';
 import Footer from './components/Footer.jsx';
 import Greet from './components/Greet.jsx';
 import Greeting from './components/Greeting.jsx';
 import { Header } from './components/Header.jsx';
-import IconComponent from './components/IconComponent.jsx';
 import { JSXRules } from './components/JSXRules.jsx';
 import ListMap from './components/ListMap.jsx';
 import MainContent from './components/MainContent.jsx';
 import Person from './components/Person.jsx';
 import { ProductInfo } from './components/ProductInfo.jsx';
 import Products from './components/Products.jsx';
+import Profile from './components/Profile.jsx';
 import ProfileCard from './components/ProfileCard.jsx';
 import StyledCard from './components/StyledCard.jsx';
+import TodoList from './components/TodoList.jsx';
 import UserInfo from './components/UserInfo.jsx';
 import UserList from './components/UserList.jsx';
 import UserStatus from './components/UserStatus.jsx';
 import Weather from './components/Weather.jsx';
 import WelcomeMessage from './components/WelcomeMessage.jsx';
+import { useState } from 'react';
 
 
 // function App() {
@@ -45,8 +49,45 @@ import WelcomeMessage from './components/WelcomeMessage.jsx';
 // export default App;
 
 const App = () => {
+
+
+  const [count, setCount] = useState(19);
+
+  const increment = () => {
+    setCount(count + 1);
+  }
+
+  const decrement = () => {
+    setCount(count - 1);
+  }
+
+  const [Friends, setFriends] = useState(['Alice', 'Bob', 'Charlie']);
+
+  const addonefriend = () => {
+    setFriends([...Friends, 'NewFriend']);
+  }
+
+  const removefriend = () => {
+    setFriends(Friends.filter((f) => f !== 'NewFriend'));
+  }
+
   return (
     <div>
+
+
+    <p>Count: {count}</p>
+
+    <button onClick={increment} >Increment Count</button>
+
+    <button onClick={decrement}>Decrement Count</button>
+
+    <p>Friends: {Friends.map(friend => {
+      return <li key={friend.toString()}>{friend}</li>
+    })}</p>
+    <button onClick={addonefriend}>Add a Friend</button>
+    <button onClick={removefriend}>Remove a Friend</button>
+
+
       <WelcomeMessage />
       <Greet />
       <Greeting timeofDay="morning" />
@@ -58,7 +99,13 @@ const App = () => {
 
       <ProfileCard />
 
-      <IconComponent />
+      <Counter />
+
+      <TodoList />
+
+      <Profile />
+      
+      <CopyInput />
 
 
       <User name="Rudraksh" age={19} isMarried={false} />
@@ -74,6 +121,7 @@ const App = () => {
 
 
     <Weather temperature={30} />
+    <Button />
 
       <ListMap />
       <UserInfo />
@@ -110,5 +158,13 @@ const Password = (props) => {
   }
 }
 
+
+const Button = () => {
+  const handleClick = () => {
+    console.log("Button Clicked!");
+  }
+
+  return <button onClick={handleClick}>Click Me</button>
+}
 
 export default App;
